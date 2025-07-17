@@ -29,6 +29,7 @@ def call_function(function_call_part, verbose=False):
         "write_file": write_file,
     }
     function_name = function_call_part.name
+    
     if function_name not in function_map:
         return types.Content(
             role="tool",
@@ -42,6 +43,7 @@ def call_function(function_call_part, verbose=False):
     args = dict(function_call_part.args)
     args["working_directory"] = WORKING_DIR
     function_result = function_map[function_name](**args)
+
     return types.Content(
         role="tool",
         parts=[
