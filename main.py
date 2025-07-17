@@ -46,6 +46,8 @@ def main():
                 break
         except Exception as e:
             print(f"Error in generate_content: {e}")
+            if e.code == 429: # Break loop if resource exhausted error
+                break
 
 def generate_content(client, messages, verbose):
     response = client.models.generate_content(
